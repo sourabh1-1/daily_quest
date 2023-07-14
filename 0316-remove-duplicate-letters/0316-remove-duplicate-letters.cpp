@@ -1,21 +1,31 @@
 class Solution {
 public:
     string removeDuplicateLetters(string s) {
-        string t="";
-        vector<int> f(26,0),v(26,0);
-        for(auto x: s) 
-            f[x-'a']++;
-        for(int i=0;i<s.size();i++){
-            f[s[i]-'a']--;
-            if(v[s[i]-'a']!=0) 
-                continue;
-            while(!t.empty() && t.back()>s[i] && f[t.back()-'a']>0){
-                v[t.back()-'a']=0;
-                t.pop_back();
-            }
-            v[s[i]-'a']=1;
-            t.push_back(s[i]);
+        vector<int> li(26, 0);
+        for (int i = 0; i < s.length(); i++){
+            li[s[i] - 'a'] = i;
         }
-        return t;
+        
+        vector<bool> visited(26, false);
+        stack<char> st;
+        
+        for (int i = 0; i < s.size(); i++) {
+            int curr = s[i] - 'a';
+            if (visited[curr]) continue;
+            while(st.size() > 0 && st.top() > s[i] && i < li[st.top() - 'a']){
+                visited[st.top() - 'a'] = false; 
+                st.pop();
+            }
+            st.push(s[i]);
+            visited[curr] = true;
+        }
+        
+        string ans = "";
+        while (st.size() > 0){
+            ans += st.top();
+            st.pop();
+        }
+        reverse(ans.begin(), ans.end());
+        return ans;
     }
 };
