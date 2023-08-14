@@ -9,14 +9,17 @@ public:
     vector<int> singleNumber(vector<int> nums) 
     {
         // Code here.
+        sort(nums.begin(),nums.end());
         vector<int> v;
-        map<int,int> m;
-        for(int i=0;i<nums.size();i++)
-            m[nums[i]]++;
-        for(auto it:m)
+        for ( int i=0;i<nums.size();i++)
         {
-            if(it.second!=2)
-            v.push_back(it.first);
+            if(nums[i]!=nums[i+1])
+            {
+                v.push_back(nums[i]);
+            }
+            else {
+                i++;
+            }
         }
         return v;
     }
