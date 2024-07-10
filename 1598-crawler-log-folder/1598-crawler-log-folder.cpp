@@ -7,10 +7,8 @@ public:
                 if(count!=0)
                     count--;
             }
-            else{
-                if(logs[i]!="./")
-                    count++;
-            }
+            else if(logs[i]!="./")
+                count++;
         }
         return count;
     }
