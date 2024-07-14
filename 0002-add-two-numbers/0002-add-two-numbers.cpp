@@ -16,45 +16,20 @@ public:
         ListNode* newList=new ListNode(-1);
         ListNode* temp=newList;
         int carry=0;
-        while(temp1!=NULL && temp2!=NULL){
-            int value=temp1->val+temp2->val+carry;
-            if(value>9){
-                value=value%10;
-                carry=1;
-            }
-            else
-                carry=0;
-            ListNode* newNode=new ListNode(value);
+        while(temp1!=NULL || temp2!=NULL){
+            int value=carry;
+            if(temp1)
+                value+=temp1->val;
+            if(temp2)
+                value+=temp2->val;
+            ListNode* newNode=new ListNode(value%10);
+            carry=value/10;
             temp->next=newNode;
             temp=newNode;
-            temp1=temp1->next;
-            temp2=temp2->next;
-        }
-        while(temp1!=NULL){
-            int value=temp1->val+carry;
-            if(value>9){
-                value=value%10;
-                carry=1;
-            }
-            else
-                carry=0;
-            ListNode* newNode=new ListNode(value);
-            temp->next=newNode;
-            temp=newNode;
-            temp1=temp1->next;
-        }
-        while(temp2!=NULL){
-            int value=temp2->val+carry;
-            if(value>9){
-                value=value%10;
-                carry=1;
-            }
-            else
-                carry=0;
-            ListNode* newNode=new ListNode(value);
-            temp->next=newNode;
-            temp=newNode;
-            temp2=temp2->next;
+            if(temp1)
+                temp1=temp1->next;
+            if(temp2)
+                temp2=temp2->next;
         }
         if(carry==1){
             ListNode* newNode=new ListNode(1);
