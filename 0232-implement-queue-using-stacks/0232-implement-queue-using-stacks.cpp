@@ -11,27 +11,19 @@ public:
     }
     
     int pop() {
-        int ans=-1;
-        if(!st2.empty()){
-            ans=st2.top();
-            st2.pop();
-            return ans;
-        }
-        else{
+        if(st2.empty()){
             while(!st1.empty()){
                 st2.push(st1.top());
                 st1.pop();
             }
-            ans=st2.top();
-            st2.pop();
         }
+        int ans=st2.top();
+        st2.pop();
         return ans;
     }
     
     int peek() {
-        if(!st2.empty())
-            return st2.top();
-        else{
+        if(st2.empty()){
             while(!st1.empty()){
                 st2.push(st1.top());
                 st1.pop();
