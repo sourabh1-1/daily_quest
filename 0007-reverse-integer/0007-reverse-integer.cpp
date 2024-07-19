@@ -14,6 +14,6 @@ public:
         }
         if(temp>INT_MAX || temp<INT_MIN)
             return 0;
-        return (flag)?-temp:temp;
+        return flag?-temp:temp;
     }
 };
